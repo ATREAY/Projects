@@ -1,0 +1,142 @@
+package BankProjectApp;
+class Branch{
+    String branchId;
+    String IFSC;
+    String branchName;
+    String address;
+    String city;
+    String state;
+    int customerCount=0;
+    Customer allCustomers[]=new Customer[10];
+    public Branch(String branchId, String IFSC, String branchName, String address, String city, String state) {
+        this.branchId = branchId;
+        this.IFSC = IFSC;
+        this.branchName = branchName;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+    }
+public void addCustomer(Customer c){
+    
+       allCustomers[customerCount++]=c;
+       System.out.println("One customer Added");
+}  
+    
+}
+
+class Bank {
+    String bankName;
+    String bankCeo;
+    String headOfficeAddress;
+    String websiteUrl;
+    int branchCount=0;
+    Branch allBranches[]=new Branch[10];
+    public Bank(String bankName, String bankCeo, String headOfficeAddress, String websiteUrl) {
+        this.bankName = bankName;
+        this.bankCeo = bankCeo;
+        this.headOfficeAddress = headOfficeAddress;
+        this.websiteUrl = websiteUrl;
+    }
+    
+    public void addBranch(Branch b){
+        
+        allBranches[branchCount++]=b;
+        System.out.println("One branch Added..");
+        
+    }
+ public void displayAllBranches(){
+     System.out.println("All branches of " +bankName);
+     for(Branch b : allBranches)
+         if(b!=null)
+         System.out.println(b.branchId+ "   "+b.branchName+"   "+b.IFSC);
+ }
+}
+class Person{
+    String name;
+    char gender;
+    int age;
+
+    public Person(String name, char gender, int age) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+    }
+    
+    public void display(){
+        
+    }
+}
+class Account{
+    int acctNum;
+    String accType;
+    float balance;
+
+    public Account(int acctNum, String accType, float balance) {
+        this.acctNum = acctNum;
+        this.accType = accType;
+        this.balance = balance;
+    }
+    
+    public void withDraw(float amount){
+        
+        
+        
+    }
+    public void deposit(float amount){
+        
+        
+    }
+    
+}
+class Customer extends Person{
+    int custId;
+    String custAddress;
+    int numAccounts;
+    Account custAccts[]=new Account[5];
+
+    public Customer(int custId, String custAddress, String name, char gender, int age) {
+        super(name, gender, age);
+        this.custId = custId;
+        this.custAddress = custAddress;
+        numAccounts=0;
+    }
+    
+    public void openAccount(){
+        // Scanner object to read account details from keyboards..
+        Account a=new Account(101,"SB",3000.0f);
+        custAccts[numAccounts++]=a;
+        Account b=new Account(107,"RD",1000);
+        custAccts[numAccounts++]=b;
+    }
+    
+    public void displayAccounts(){
+        
+       for(int i=0;i<numAccounts;i++ )
+            System.out.println(custAccts[i].accType + "  "+custAccts[i].acctNum + "   "+custAccts[i].balance);
+        
+        
+    }
+}
+
+public class BankProjectApp {
+
+
+    public static void main(String[] args) {
+        
+        Bank b=new Bank("ICICI Bank","CEO- Bharadvaj","Mumbai Borivili","https://icicibank.com");
+        Branch b1=new Branch("ICIC100","ICIC0000771","Udyambag Branch","Industrial Area, Udyambag","Belgaum","Karnataka");
+        Branch b2=new Branch("ICIC103","ICIC0000773","Mahantesh Nagar Branch", "MM Extension Mahantesh Nager","Belgaum","Karnataka");
+        b.addBranch(b1);
+        b.addBranch(b2);
+        b.displayAllBranches();
+        Customer c=new Customer(100, "Belgaum", "Ajay",'M',32);
+       
+        b1.addCustomer(c);
+        c.openAccount();
+        System.out.print("Customer Account details  of ");
+        System.out.println(c.name);
+        c.displayAccounts();
+        
+    }
+    
+}
